@@ -29,7 +29,6 @@ public class DelfiArticleTest {
         driver.get(WEB_PAGE);
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
-
         List<WebElement> articles = driver.findElements(ARTICLE);
         WebElement article = articles.get(0);
         String articleTitleHomePage = article.findElement(HOME_PAGE_ARTICLE_TITLE).getText().replaceAll(" *", "");
