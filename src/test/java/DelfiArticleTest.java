@@ -27,11 +27,11 @@ public class DelfiArticleTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(WEB_PAGE);
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 15);
 
         List<WebElement> articles = driver.findElements(ARTICLE);
-        WebElement article = articles.get(0);
-        String articleTitleHomePage = article.findElement(HOME_PAGE_ARTICLE_TITLE).getText().replaceAll(" *", "");
+        WebElement article = articles.get(1);
+        String articleTitleHomePage = article.findElement(HOME_PAGE_ARTICLE_TITLE).getText().trim();
         int commentCount = 0;
         if (!articles.get(0).findElements(HOME_PAGE_COMMENT_COUNT).isEmpty()) {
             commentCount = parseCommentCount(article.findElement(HOME_PAGE_COMMENT_COUNT).getText());
@@ -42,7 +42,7 @@ public class DelfiArticleTest {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(ARTICLE_PAGE_ARTICLE_TITLE));
         Assertions.assertEquals(articleTitleHomePage, driver.findElement(ARTICLE_PAGE_ARTICLE_TITLE).getText().
-                replaceAll(" *", ""), "Article titles does not match with home page!");
+                trim(), "Article titles does not match with home page!");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(ARTICLE_PAGE_COMMENT_COUNT));
         int commentCountArticlePage = parseCommentCount(driver.findElement(ARTICLE_PAGE_COMMENT_COUNT).getText());
@@ -52,7 +52,7 @@ public class DelfiArticleTest {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(COMMENT_PAGE_ARTICLE_TITLE));
         Assertions.assertEquals(articleTitleHomePage, driver.findElement(COMMENT_PAGE_ARTICLE_TITLE).getText().
-                replaceAll(" *", ""), "Article title does not match with home page!");
+                trim(), "Article title does not match with home page!");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(COMMENT_PAGE_COMMENT_COUNT));
         int commentCountCommentPage = parseCommentCount(driver.findElements(COMMENT_PAGE_COMMENT_COUNT).get(0).getText())
