@@ -87,7 +87,6 @@ public class DelfiArticleTest {
 
     private int parseCommentCount(String textToParse) {
         return Integer.parseInt(textToParse.substring(1, textToParse.length() - 1));
-
     }
 
     @AfterAll
