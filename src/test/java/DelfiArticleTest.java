@@ -1,3 +1,5 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,40 +22,62 @@ public class DelfiArticleTest {
     private final By ARTICLE_PAGE_COMMENT_COUNT = By.xpath(".//a[contains(@class,'d-print-none')]");
     private final By COMMENT_PAGE_ARTICLE_TITLE = By.xpath(".//h1[@class='article-title']");
     private final By COMMENT_PAGE_COMMENT_COUNT = By.xpath(".//span[@class='type-cnt']");
+    private final Logger LOGGER = LogManager.getLogger(this.getClass());
 
     @Test
     public void articleTitleAndCommentCheck() {
+        LOGGER.info("This test is checking title and comment count");
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
+
+        LOGGER.info("Opening new browser");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+
+        LOGGER.info("Open new web-page");
         driver.get(WEB_PAGE);
+
+        LOGGER.info("Setting wait conditions");
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
+        LOGGER.info("Getting all articles on webpage");
         List<WebElement> articles = driver.findElements(ARTICLE);
-        WebElement article = articles.get(1);
+
+        LOGGER.info("Getting article");
+        WebElement article = articles.get(0);
+
+        LOGGER.info("Getting article title");
         String articleTitleHomePage = article.findElement(HOME_PAGE_ARTICLE_TITLE).getText().trim();
+
+        LOGGER.info("Getting comment count for article on home page");
         int commentCount = 0;
         if (!articles.get(0).findElements(HOME_PAGE_COMMENT_COUNT).isEmpty()) {
             commentCount = parseCommentCount(article.findElement(HOME_PAGE_COMMENT_COUNT).getText());
         }
         System.out.println(articleTitleHomePage + " : " + commentCount + " " + "komentari");
+
+        LOGGER.info("Clicking on article link");
         wait.until(ExpectedConditions.visibilityOfElementLocated(HOME_PAGE_ARTICLE_TITLE));
         article.findElement(HOME_PAGE_ARTICLE_TITLE).click();
 
+        LOGGER.info("Comparing article page title with home page");
         wait.until(ExpectedConditions.visibilityOfElementLocated(ARTICLE_PAGE_ARTICLE_TITLE));
         Assertions.assertEquals(articleTitleHomePage, driver.findElement(ARTICLE_PAGE_ARTICLE_TITLE).getText().
                 trim(), "Article titles does not match with home page!");
 
+        LOGGER.info("Comparing article page comment count with home page");
         wait.until(ExpectedConditions.visibilityOfElementLocated(ARTICLE_PAGE_COMMENT_COUNT));
-        int commentCountArticlePage = parseCommentCount(driver.findElement(ARTICLE_PAGE_COMMENT_COUNT).getText());
-        Assertions.assertEquals(commentCount, commentCountArticlePage,
+        Assertions.assertEquals(commentCount, parseCommentCount(driver.findElement(ARTICLE_PAGE_COMMENT_COUNT).getText()),
                 "Comment count does not match with home page!");
+
+        LOGGER.info("Clicking on comment page link");
         driver.findElement(ARTICLE_PAGE_COMMENT_COUNT).click();
 
+        LOGGER.info("Comparing comment page title with home page");
         wait.until(ExpectedConditions.visibilityOfElementLocated(COMMENT_PAGE_ARTICLE_TITLE));
         Assertions.assertEquals(articleTitleHomePage, driver.findElement(COMMENT_PAGE_ARTICLE_TITLE).getText().
                 trim(), "Article title does not match with home page!");
 
+        LOGGER.info("Comparing comment page comment count with home page");
         wait.until(ExpectedConditions.visibilityOfElementLocated(COMMENT_PAGE_COMMENT_COUNT));
         int commentCountCommentPage = parseCommentCount(driver.findElements(COMMENT_PAGE_COMMENT_COUNT).get(0).getText())
                 + parseCommentCount(driver.findElements(COMMENT_PAGE_COMMENT_COUNT).get(1).getText());
