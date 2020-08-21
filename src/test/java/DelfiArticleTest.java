@@ -27,13 +27,17 @@ public class DelfiArticleTest {
     @Test
     public void articleTitleAndCommentCheck() {
         LOGGER.info("This test is checking title and comment count");
+
+        LOGGER.info("Setting up driver's path");
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
 
         LOGGER.info("Opening new browser");
         driver = new ChromeDriver();
+
+        LOGGER.info("Maximizing window");
         driver.manage().window().maximize();
 
-        LOGGER.info("Open new web-page");
+        LOGGER.info("Opening new web-page");
         driver.get(WEB_PAGE);
 
         LOGGER.info("Setting wait conditions");
