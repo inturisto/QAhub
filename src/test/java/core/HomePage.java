@@ -7,7 +7,8 @@ import java.util.List;
 
 public class HomePage {
     private final By TITLE = By.xpath(".//h1[contains(@class,'headline__title')]");
-    public BaseFunc baseFunc;
+    private BaseFunc baseFunc;
+
 
     public HomePage(BaseFunc baseFunc) {
         this.baseFunc = baseFunc;
@@ -15,7 +16,7 @@ public class HomePage {
 
     public String getTitleById(int id) {
         List<WebElement> titles = baseFunc.findElements(TITLE);
-        return titles.get(id-1).getText();
+        return titles.get(id-1).getText().trim();
     }
 
     public void goToTitleById(int id){
