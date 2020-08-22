@@ -1,4 +1,4 @@
-package pageobject;
+package core;
 
 import org.openqa.selenium.By;
 

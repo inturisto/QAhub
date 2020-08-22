@@ -1,9 +1,11 @@
-package pageobject;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import core.ArticlePage;
+import core.BaseFunc;
+import core.HomePage;
 
 public class DelfiTitleTest {
+
     private BaseFunc baseFunc = new BaseFunc();
 
     @Test
@@ -17,6 +19,8 @@ public class DelfiTitleTest {
         ArticlePage articlePage = new ArticlePage(baseFunc);
         String articlePageTitle = articlePage.getTitle();
 
-        Assertions.assertEquals(homePageTitle,articlePageTitle,"Does not match!");
+        Assertions.assertEquals(homePageTitle, articlePageTitle, "Does not match!");
     }
 }
+
+
