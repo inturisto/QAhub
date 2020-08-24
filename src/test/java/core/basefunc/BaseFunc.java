@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class BaseFunc {
-    private final String HOME_PAGE_URL = "delfi.lv";
+
     private WebDriver driver;
     private WebDriverWait wait;
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
@@ -25,10 +25,10 @@ public class BaseFunc {
         LOGGER.info("Maximizing window");
         driver.manage().window().maximize();
         LOGGER.info("Setting up wait conditions");
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 5);
     }
 
-    public void goToUrl(String url) {
+    public void openPage(String url) {
         LOGGER.info("Checking url before proceeding to web-page");
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = "http://" + url;
@@ -37,29 +37,26 @@ public class BaseFunc {
         driver.get(url);
     }
 
-    public void openHomePage() {
-        LOGGER.info("Proceeding to Home page");
-        goToUrl(HOME_PAGE_URL);
-    }
-
     public List<WebElement> findElements(By locator) {
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
         LOGGER.info("Finding all web-element by locator");
         return driver.findElements(locator);
     }
 
     public WebElement findElement(By locator) {
-        LOGGER.info("Finding exact element by locator");
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        LOGGER.info("Finding exact element by locator");
         return driver.findElement(locator);
     }
 
     public void click(WebElement webElement) {
-        LOGGER.info("Clicking on web-element");
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
         webElement.click();
+        LOGGER.info("Clicking on web-element");
     }
 
     public int parseCommentCount(String textToParse) {
+        LOGGER.info("Parsing to integer");
         return Integer.parseInt(textToParse.substring(1, textToParse.length() - 1));
     }
 
