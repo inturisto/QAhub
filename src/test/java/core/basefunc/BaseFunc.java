@@ -1,4 +1,4 @@
-package core;
+package core.basefunc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,6 +57,15 @@ public class BaseFunc {
         LOGGER.info("Clicking on web-element");
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
         webElement.click();
+    }
+
+    public int parseCommentCount(String textToParse) {
+        return Integer.parseInt(textToParse.substring(1, textToParse.length() - 1));
+    }
+
+    public void closeBrowser() {
+        LOGGER.info("Closing browser");
+        driver.quit();
     }
 }
 

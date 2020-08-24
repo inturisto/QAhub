@@ -1,5 +1,6 @@
-package core;
+package core.pages;
 
+import core.basefunc.BaseFunc;
 import org.openqa.selenium.By;
 
 public class CommentPage {

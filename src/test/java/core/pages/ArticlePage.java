@@ -1,5 +1,6 @@
-package core;
+package core.pages;
 
+import core.basefunc.BaseFunc;
 import org.openqa.selenium.By;
 
 public class ArticlePage {
@@ -15,7 +16,11 @@ public class ArticlePage {
         return baseFunc.findElement(TITLE).getText().trim();
     }
 
-    public void goToCommentPage(){
+    public void goToCommentPage() {
         baseFunc.click(baseFunc.findElement(ARTICLE_PAGE_COMMENT_COUNT));
+    }
+
+    public void getCommentCount(){
+
     }
 }
