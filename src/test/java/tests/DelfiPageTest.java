@@ -11,11 +11,10 @@ import core.basefunc.BaseFunc;
 import core.pages.HomePage;
 
 public class DelfiPageTest {
-
-    private final int ARTICLE_NUMBER = 1;
+    private final int ARTICLE_NUMBER = 6;
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
-    private BaseFunc baseFunc = new BaseFunc();
 
+    private BaseFunc baseFunc = new BaseFunc();
 
     @Test
     public void titleTest() {

@@ -6,18 +6,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class BaseFunc {
-
     private WebDriver driver;
     private WebDriverWait wait;
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
 
     public BaseFunc() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
         LOGGER.info("Setting up driver's path");
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         LOGGER.info("Opening new browser");
@@ -25,7 +27,7 @@ public class BaseFunc {
         LOGGER.info("Maximizing window");
         driver.manage().window().maximize();
         LOGGER.info("Setting up wait conditions");
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 10);
     }
 
     public void openPage(String url) {
@@ -38,7 +40,6 @@ public class BaseFunc {
     }
 
     public List<WebElement> findElements(By locator) {
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
         LOGGER.info("Finding all web-element by locator");
         return driver.findElements(locator);
     }
@@ -63,6 +64,10 @@ public class BaseFunc {
     public void closeBrowser() {
         LOGGER.info("Closing browser");
         driver.quit();
+    }
+
+    public void visibilityOfElement(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }
 

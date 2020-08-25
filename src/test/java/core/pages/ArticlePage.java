@@ -6,10 +6,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 
 public class ArticlePage {
-
     private final By ARTICLE_PAGE_ARTICLE_TITLE = By.xpath(".//h1[contains(@class,'d-inline')]");
     private final By ARTICLE_PAGE_COMMENT_COUNT = By.xpath(".//a[contains(@class,'d-print-none')]");
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
+
     private BaseFunc baseFunc;
 
     public ArticlePage(BaseFunc baseFunc) {
@@ -32,6 +32,4 @@ public class ArticlePage {
         LOGGER.info("Proceeding to comment page");
         return new CommentPage(baseFunc);
     }
-
-
 }
