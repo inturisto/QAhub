@@ -7,11 +7,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import core.pages.ArticlePage;
-import core.basefunc.BaseFunc;
+import core.BaseFunc;
 import core.pages.HomePage;
 
 public class DelfiPageTest {
-    private final int ARTICLE_NUMBER = 6;
+    private final int ARTICLE_NUMBER =3;
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
 
     private BaseFunc baseFunc = new BaseFunc();
