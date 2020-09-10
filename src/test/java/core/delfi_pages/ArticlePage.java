@@ -47,15 +47,12 @@ public class ArticlePage {
     }
 
     public int getCommentCount() {
-
         LOGGER.info("Getting comment count.");
 
         return baseFunc.parseTextToNumber(baseFunc.getText(COMMENTS));
     }
 
     public CommentPage goToCommentPage() {
-
-
         LOGGER.info("Finding comment page.");
 
         baseFunc.clickByLocator(COMMENTS);
