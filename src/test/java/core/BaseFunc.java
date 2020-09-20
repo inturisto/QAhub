@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -55,6 +55,7 @@ public class BaseFunc {
     }
 
     public List<WebElement> findElements(By locator) {
+
         LOGGER.info("Finding all WebElements by locator.");
 
         return driver.findElements(locator);
@@ -145,6 +146,24 @@ public class BaseFunc {
         driver.switchTo().defaultContent();
 
         LOGGER.info("Switched successfully to default page.");
+    }
+
+    public void refreshPage() {
+        driver.navigate().refresh();
+    }
+
+    public void navigateOnPreviousPage() {
+        driver.navigate().back();
+    }
+
+    public void navigateOnNextPage() {
+        driver.navigate().forward();
+    }
+
+    public void moveToElement(WebElement firstElement, WebElement secondElement) {
+        Actions action = new Actions(driver);
+        action.moveToElement(firstElement).build().perform();
+        action.moveToElement(secondElement).click().build().perform();
     }
 }
 

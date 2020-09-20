@@ -40,6 +40,7 @@ public class ArticlePage {
         }
     }
 
+
     public String getTitle() {
         LOGGER.info("Getting article title text.");
 
